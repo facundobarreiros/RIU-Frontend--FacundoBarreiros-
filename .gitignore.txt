@@ -1,0 +1,45 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+.pnpm-debug.log*
+
+# Compilados Angular
+dist/
+tmp/
+out-tsc/
+.angular/
+
+# Archivos de ambiente
+.env
+.env.*
+
+# IDEs
+.vscode/
+.idea/
+
+# Sistemas operativos
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Coverage (pruebas unitarias)
+coverage/
+*.lcov
+
+# Angular config auto-generados
+.angular/cache/
+
+# Compilados de producción o pruebas
+*.js
+*.js.map
+
+# Otros
+.sass-cache/
+.cache/
+*.bak
+*.swp
