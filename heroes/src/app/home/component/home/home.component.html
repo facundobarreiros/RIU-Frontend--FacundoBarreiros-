@@ -1,0 +1,33 @@
+<section class="flex-container">
+  <div class="card">
+    <div class="header">
+      <h1>Listado de superhéroes</h1>
+      <button mat-raised-button color="primary" [routerLink]="['/crear']">Añadir</button>
+    </div>
+
+    <div class="content-wrapper">
+      <aside class="filter-column">
+        <app-filter-group (search)="setFilters($event)"></app-filter-group>
+      </aside>
+
+      <div class="hero-list">
+        @for (heroe of paginatedHeroes(); track heroe) {
+        <app-heroe [heroe]="heroe">
+          <button mat-raised-button color="primary" [routerLink]="['/editar', heroe.id]">Editar</button>
+          <button mat-raised-button color="warn" (click)="deleteHero(heroe.id)">Eliminar</button>
+        </app-heroe>
+        }
+      </div>
+
+      <div *ngIf="loadingService.loading$ | async as loading">
+          <mat-progress-bar  *ngIf="loading"  mode="indeterminate" color="primary"></mat-progress-bar>
+      </div>
+
+      <div class="paginator-container">
+        <mat-paginator [pageSizeOptions]="[5, 10, 25]" [pageSize]="pageSize()" [length]="totalHeroes()"
+          [pageIndex]="pageIndex" (page)="onPageChange($event)">
+        </mat-paginator>
+      </div>
+    </div>
+  </div>
+</section>
