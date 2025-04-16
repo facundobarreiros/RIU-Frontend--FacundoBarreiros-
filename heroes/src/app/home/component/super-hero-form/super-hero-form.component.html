@@ -1,0 +1,47 @@
+<div class="container">
+  <ng-container *ngIf="!(loadingService.loading$ | async) else spinnerTemplate">
+
+    <form [formGroup]="superheroForm" (ngSubmit)="onSubmit()">
+
+      <mat-card class="card">
+        <mat-card-title>{{ editing ? 'Editar' : 'Crear' }} Superhéroe</mat-card-title>
+        <mat-card-content class="card-content">
+          <div>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Nombre</mat-label>
+              <input matInput appUppercase placeholder="Ej: Spiderman" formControlName="name">
+              <mat-error *ngIf="superheroForm.get('name')?.hasError('required')">
+                Este campo es requerido
+              </mat-error>
+              <mat-error *ngIf="superheroForm.get('name')?.hasError('minlength')">
+                Mínimo 3 caracteres
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div>
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Poder</mat-label>
+              <input matInput placeholder="Ej: Telarañas" formControlName="power">
+              <mat-error *ngIf="superheroForm.get('power')?.hasError('required')">
+                Este campo es requerido
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </mat-card-content>
+        <mat-card-actions class="action-buttons">
+          <button mat-button type="button" [routerLink]="['']">Cancelar</button>
+          <button mat-raised-button color="primary" type="submit" [disabled]="superheroForm.invalid">
+            {{ editing ? 'Guardar Cambios' : 'Crear' }}
+          </button>
+        </mat-card-actions>
+      </mat-card>
+
+    </form>
+
+  </ng-container>
+
+  <ng-template #spinnerTemplate>
+    <mat-spinner mode="indeterminate" color="primary"></mat-spinner>
+  </ng-template>
+
+</div>
